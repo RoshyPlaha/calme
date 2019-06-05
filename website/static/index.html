@@ -1,0 +1,20 @@
+<link href="node_modules/bootstrap/dist/css/bootstrap.css" type="text/css" rel="stylesheet">
+<script src="node_modules/jquery/dist/jquery.js"></script>
+
+<html>
+    <head>
+        <link href="node_modules/bootstrap/dist/css/bootstrap.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+        <p id="para">Hello World!</p>
+        <button type="button" id="german-button" value="Switch to German" class="btn-primary">Switch to German</button>
+        <script src="node_modules/jquery/dist/jquery.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("#german-button").click(function () {
+                    $("#para").text("Hallo Welt");
+                });
+            })
+        </script>
+    </body>
+</html>
