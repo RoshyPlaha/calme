@@ -1,9 +1,0 @@
-{
-  "name": "calme",
-  "description": "",
-  "version": "0.1.0",
-  "dependencies": {},
-  "devDependencies": {
-    "serverless-s3-sync": "^1.8.0"
-  }
-}
