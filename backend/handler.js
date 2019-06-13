@@ -3,7 +3,7 @@
 module.exports.hello = async (event, context, callback) => {
 
   const response = {
-    statusCode = 200,
+    statusCode: 200,
     headers: {
       'Access-Control-Allow-Origin': '*'
     },

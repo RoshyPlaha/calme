@@ -16,10 +16,10 @@
         }
       }
     },
-    "HelloLogGroup": {
+    "HelloUnderscoreslsLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/calme-backend-dev-hello"
+        "LogGroupName": "/aws/lambda/calme-backend-dev-hello_sls"
       }
     },
     "IamRoleLambdaExecution": {
@@ -63,7 +63,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/calme-backend-dev-hello:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/calme-backend-dev-hello_sls:*"
                     }
                   ]
                 },
@@ -74,7 +74,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/calme-backend-dev-hello:*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/calme-backend-dev-hello_sls:*:*"
                     }
                   ]
                 }
@@ -98,16 +98,16 @@
         }
       }
     },
-    "HelloLambdaFunction": {
+    "HelloUnderscoreslsLambdaFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/calme-backend/dev/1559588650698-2019-06-03T19:04:10.698Z/calme-backend.zip"
+          "S3Key": "serverless/calme-backend/dev/1560450720363-2019-06-13T18:32:00.363Z/calme-backend.zip"
         },
-        "FunctionName": "calme-backend-dev-hello",
+        "FunctionName": "calme-backend-dev-hello_sls",
         "Handler": "handler.hello",
         "MemorySize": 1024,
         "Role": {
@@ -120,18 +120,18 @@
         "Timeout": 6
       },
       "DependsOn": [
-        "HelloLogGroup",
+        "HelloUnderscoreslsLogGroup",
         "IamRoleLambdaExecution"
       ]
     },
-    "HelloLambdaVersion3oMygNUr7HNfskBLp5mQXU5E7LcQhTd2scODt0SdOo": {
+    "HelloUnderscoreslsLambdaVersion9bRhSWXiPKeiq15oSVMwIsobC2TX4NppEYgW8yitw4": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
-          "Ref": "HelloLambdaFunction"
+          "Ref": "HelloUnderscoreslsLambdaFunction"
         },
-        "CodeSha256": "/ZGloc24xhhe7pJ1YmVzqbBi/TE1nntDPruOk1G4ky8="
+        "CodeSha256": "tvgjXYr+30hQzjV5S5/euo19n1Wyboz3V23iA1eoZ+I="
       }
     },
     "ApiGatewayRestApi": {
@@ -219,7 +219,10 @@
           "Ref": "ApiGatewayRestApi"
         },
         "ApiKeyRequired": false,
-        "AuthorizationType": "AWS_IAM",
+        "AuthorizationType": "COGNITO_USER_POOLS",
+        "AuthorizerId": {
+          "Ref": "2UnderscorejJeH7hncYApiGatewayAuthorizer"
+        },
         "Integration": {
           "IntegrationHttpMethod": "POST",
           "Type": "AWS_PROXY",
@@ -238,7 +241,7 @@
                 ":lambda:path/2015-03-31/functions/",
                 {
                   "Fn::GetAtt": [
-                    "HelloLambdaFunction",
+                    "HelloUnderscoreslsLambdaFunction",
                     "Arn"
                   ]
                 },
@@ -248,9 +251,25 @@
           }
         },
         "MethodResponses": []
+      },
+      "DependsOn": "2UnderscorejJeH7hncYApiGatewayAuthorizer"
+    },
+    "2UnderscorejJeH7hncYApiGatewayAuthorizer": {
+      "Type": "AWS::ApiGateway::Authorizer",
+      "Properties": {
+        "AuthorizerResultTtlInSeconds": 300,
+        "IdentitySource": "method.request.header.Authorization",
+        "Name": "2_jJeH7hncY",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "Type": "COGNITO_USER_POOLS",
+        "ProviderARNs": [
+          "arn:aws:cognito-idp:eu-west-2:597184794210:userpool/eu-west-2_jJeH7hncY"
+        ]
       }
     },
-    "ApiGatewayDeployment1559588648449": {
+    "ApiGatewayDeployment1560450718125": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -263,12 +282,12 @@
         "ApiGatewayMethodHelloGet"
       ]
     },
-    "HelloLambdaPermissionApiGateway": {
+    "HelloUnderscoreslsLambdaPermissionApiGateway": {
       "Type": "AWS::Lambda::Permission",
       "Properties": {
         "FunctionName": {
           "Fn::GetAtt": [
-            "HelloLambdaFunction",
+            "HelloUnderscoreslsLambdaFunction",
             "Arn"
           ]
         },
@@ -312,155 +331,9 @@
         "ClientName": "cognito_sls_backend_client",
         "UserPoolId": {
           "Ref": "CognitoUserPool"
-        }
-      }
-    },
-    "CognitoIdentityPool": {
-      "Type": "AWS::Cognito::IdentityPool",
-      "Properties": {
-        "IdentityPoolName": "cognito_sls_backend_identity_pool",
-        "AllowUnauthenticatedIdentities": false,
-        "CognitoIdentityProviders": [
-          {
-            "ClientId": {
-              "Ref": "CognitoUserPoolClient"
-            },
-            "ProviderName": {
-              "Fn::GetAtt": [
-                "CognitoUserPool",
-                "ProviderName"
-              ]
-            }
-          }
-        ]
-      }
-    },
-    "CognitoIdentityPoolRoles": {
-      "Type": "AWS::Cognito::IdentityPoolRoleAttachment",
-      "Properties": {
-        "IdentityPoolId": {
-          "Ref": "CognitoIdentityPool"
         },
-        "Roles": {
-          "authenticated": {
-            "Fn::GetAtt": [
-              "CognitoAuthRole",
-              "Arn"
-            ]
-          },
-          "unauthenticated": {
-            "Fn::GetAtt": [
-              "CognitoUnauthRole",
-              "Arn"
-            ]
-          }
-        }
-      }
-    },
-    "CognitoAuthRole": {
-      "Type": "AWS::IAM::Role",
-      "Properties": {
-        "RoleName": "appAuthRole",
-        "Path": "/",
-        "AssumeRolePolicyDocument": {
-          "Version": "2012-10-17",
-          "Statement": [
-            {
-              "Effect": "Allow",
-              "Principal": {
-                "Federated": "cognito-identity.amazonaws.com"
-              },
-              "Action": [
-                "sts:AssumeRoleWithWebIdentity"
-              ],
-              "Condition": {
-                "StringEquals": {
-                  "cognito-identity.amazonaws.com:aud": {
-                    "Ref": "CognitoIdentityPool"
-                  }
-                },
-                "ForAnyValue:StringLike": {
-                  "cognito-identity.amazonaws.com:amr": "authenticated"
-                }
-              }
-            }
-          ]
-        },
-        "Policies": [
-          {
-            "PolicyName": "CognitoAuthorizedPolicy",
-            "PolicyDocument": {
-              "Version": "2012-10-17",
-              "Statement": [
-                {
-                  "Effect": "Allow",
-                  "Action": [
-                    "mobileanalytics:PutEvents",
-                    "cognito-sync:*",
-                    "cognito-identity:*"
-                  ],
-                  "Resource": "*"
-                },
-                {
-                  "Effect": "Allow",
-                  "Action": [
-                    "execute-api:Invoke"
-                  ],
-                  "Resource": "*"
-                }
-              ]
-            }
-          }
-        ]
-      }
-    },
-    "CognitoUnauthRole": {
-      "Type": "AWS::IAM::Role",
-      "Properties": {
-        "RoleName": "appUnauthRole",
-        "Path": "/",
-        "AssumeRolePolicyDocument": {
-          "Version": "2012-10-17",
-          "Statement": [
-            {
-              "Effect": "Allow",
-              "Principal": {
-                "Federated": "cognito-identity.amazonaws.com"
-              },
-              "Action": [
-                "sts:AssumeRoleWithWebIdentity"
-              ],
-              "Condition": {
-                "StringEquals": {
-                  "cognito-identity.amazonaws.com:aud": {
-                    "Ref": "CognitoIdentityPool"
-                  }
-                },
-                "ForAnyValue:StringLike": {
-                  "cognito-identity.amazonaws.com:amr": "unauthenticated"
-                }
-              }
-            }
-          ]
-        },
-        "Policies": [
-          {
-            "PolicyName": "CognitoUnauthorizedPolicy",
-            "PolicyDocument": {
-              "Version": "2012-10-17",
-              "Statement": [
-                {
-                  "Effect": "Allow",
-                  "Action": [
-                    "mobileanalytics:PutEvents",
-                    "cognito-sync:*",
-                    "cognito-identity:*"
-                  ],
-                  "Resource": "*"
-                }
-              ]
-            }
-          }
+        "ExplicitAuthFlows": [
+          "ADMIN_NO_SRP_AUTH"
         ]
       }
     }
@@ -471,10 +344,10 @@
         "Ref": "ServerlessDeploymentBucket"
       }
     },
-    "HelloLambdaFunctionQualifiedArn": {
+    "HelloUnderscoreslsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "HelloLambdaVersion3oMygNUr7HNfskBLp5mQXU5E7LcQhTd2scODt0SdOo"
+        "Ref": "HelloUnderscoreslsLambdaVersion9bRhSWXiPKeiq15oSVMwIsobC2TX4NppEYgW8yitw4"
       }
     },
     "ServiceEndpoint": {

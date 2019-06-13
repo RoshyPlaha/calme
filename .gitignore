@@ -1,3 +1,5 @@
 website/node_modules
 website/static/node_modules
+website/.DS_Store
 backend/node_modules
+backend/.serverless/calme-backend.zip
