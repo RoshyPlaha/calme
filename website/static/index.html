@@ -7,14 +7,49 @@
     </head>
     <body>
         <p id="para">Hello World!</p>
+        <p>reference: <a>https://www.npmjs.com/package/amazon-cognito-identity-js?activeTab=readme</a></p>
         <button type="button" id="german-button" value="Switch to German" class="btn-primary">Switch to German</button>
         <script src="node_modules/jquery/dist/jquery.js"></script>
+        <script src="node_modules/amazon-cognito-identity-js/dist/amazon-cognito-identity.min.js"></script>
         <script>
             $(document).ready(function () {
                 $("#german-button").click(function () {
                     $("#para").text("Hallo Welt");
                 });
-            })
+
+                var CognitoUserPool = AmazonCognitoIdentity.CognitoUserPool;
+                
+                var authenticationData = {
+                    Username : '',
+                    Password : '',
+                };
+                
+                var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
+                var poolData = {
+                    UserPoolId : '', // Your user pool id here
+                    ClientId : '' // Your client id here
+                };
+
+                var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+                var userData = {
+                    Username : 'p@gmail.com',
+                    Pool : userPool
+                };
+
+                var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+                cognitoUser.authenticateUser(authenticationDetails, {
+                    onSuccess: function (result) {
+                    var accessToken = result.getAccessToken().getJwtToken();
+                    console.log(accessToken);
+    
+                },
+ 
+                onFailure: function(err) {
+                    alert(err.message || JSON.stringify(err));
+                },
+ 
+            });
+        });
         </script>
     </body>
 </html>
