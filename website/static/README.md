@@ -14,4 +14,7 @@ aws cognito-idp sign-up \
   --user-pool-id <id> \
   --username <name>
 
+login
+aws cognito-idp admin-initiate-auth --user-pool-id <id> --client-id <id> --auth-flow ADMIN_NO_SRP_AUTH --auth-parameters USERNAME=<username-email>,PASSWORD=<password> --region <region>
+
   To run website locally, use the `switchconfigvalues.sh` in the website folder. Make sure you have the client id and app id set as env variables.

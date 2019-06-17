@@ -105,7 +105,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/calme-backend/dev/1560798945392-2019-06-17T19:15:45.392Z/calme-backend.zip"
+          "S3Key": "serverless/calme-backend/dev/1560800775794-2019-06-17T19:46:15.794Z/calme-backend.zip"
         },
         "FunctionName": "calme-backend-dev-hello_sls",
         "Handler": "handler.hello",
@@ -124,14 +124,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "HelloUnderscoreslsLambdaVersionYfQL158P9dYTaWp9jUh1tqSSGEiLk91biN4fcPzFzPI": {
+    "HelloUnderscoreslsLambdaVersionVbaVruOEp7UEHb9aGdd9dtILGLMa7LC6WbbTv749FI": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "HelloUnderscoreslsLambdaFunction"
         },
-        "CodeSha256": "XtSncsq8Vsb0cToHh9jFlmkSS4LP0ULx5Ayt8ViofTo="
+        "CodeSha256": "ue5C6R5YU6sxAJ/qOjybTMn3zj2wyQKhosOK/nIhTqE="
       }
     },
     "ApiGatewayRestApi": {
@@ -269,7 +269,7 @@
         ]
       }
     },
-    "ApiGatewayDeployment1560798940311": {
+    "ApiGatewayDeployment1560800769568": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -347,7 +347,7 @@
     "HelloUnderscoreslsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "HelloUnderscoreslsLambdaVersionYfQL158P9dYTaWp9jUh1tqSSGEiLk91biN4fcPzFzPI"
+        "Ref": "HelloUnderscoreslsLambdaVersionVbaVruOEp7UEHb9aGdd9dtILGLMa7LC6WbbTv749FI"
       }
     },
     "ServiceEndpoint": {

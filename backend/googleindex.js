@@ -1,6 +1,8 @@
 const fs = require('fs');
 const readline = require('readline');
 const {google} = require('googleapis');
+const path = require("path");
+
 
 // If modifying these scopes, delete token.json.
 const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
@@ -10,11 +12,16 @@ const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
 const TOKEN_PATH = 'token.json';
 
 // Load client secrets from a local file.
-fs.readFile('credentials.json', (err, content) => {
-  if (err) return console.log('Error loading client secret file:', err);
-  // Authorize a client with credentials, then call the Google Calendar API.
-  authorize(JSON.parse(content), listEvents);
-});
+
+const startit = () => {
+  console.log(path.resolve(__dirname + "/google/credentials.json"));
+  fs.readFile(__dirname + '/google/credentials.json', (err, content) => {
+    if (err) return console.log('Error loading client secret file:', err);
+    // Authorize a client with credentials, then call the Google Calendar API.
+    authorize(JSON.parse(content), listEvents);
+  });
+  
+}
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
@@ -102,4 +109,8 @@ const findCalMeEvents = (events) => {
 
 const convertDateToCron = (startDate) => {
   console.log('date to play with ' + startDate)
+}
+
+module.exports = {
+  startit
 }
