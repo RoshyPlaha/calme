@@ -29,6 +29,16 @@ functions:
           cors: true
           authorizer:
             arn: arn:aws:cognito-idp:eu-west-2:597184794210:userpool/eu-west-2_jJeH7hncY
+    # environment:
+    #   client_id: 499249526195-8ij6lrjvjic7id669ranoi9pel2tueqm.apps.googleusercontent.com
+    #   project_id: quickstart-1552681727597
+    #   auth_uri: https://accounts.google.com/o/oauth2/auth
+    #   token_uri: https://oauth2.googleapis.com/token
+    #   auth_provider_x509_cert_url: https://www.googleapis.com/oauth2/v1/certs
+    #   client_secret: Qib_WG8B0b5qMtyUHDEGoXPS
+    #   redirect_uris:
+    #     - urn:ietf:wg:oauth:2.0:oob
+    #     - http://localhost
 
 resources:
   Resources:

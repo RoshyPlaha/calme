@@ -13,3 +13,5 @@ aws cognito-idp sign-up \
   --region <region> \
   --user-pool-id <id> \
   --username <name>
+
+  To run website locally, use the `switchconfigvalues.sh` in the website folder. Make sure you have the client id and app id set as env variables.
