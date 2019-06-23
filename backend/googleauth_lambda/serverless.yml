@@ -1,0 +1,71 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+service: calme-backend # NOTE: update this with your service name
+
+plugins:
+  - serverless-offline
+  
+provider:
+  name: aws
+  runtime: nodejs10.x
+  region: eu-west-2
+
+
+functions:
+  requestGoogleAuth_sls:
+    handler: handler.requestAuthUrl
+    events:
+      - http:
+          path: hello
+          method: get
+          cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:eu-west-2:597184794210:userpool/eu-west-2_jJeH7hncY
+  confirmGoogleAuth_sls:
+    handler: handler.processAuthToken
+    events:
+      - http:
+          path: hello
+          method: post
+          cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:eu-west-2:597184794210:userpool/eu-west-2_jJeH7hncY
+
+    # environment:
+    #   client_id: 499249526195-8ij6lrjvjic7id669ranoi9pel2tueqm.apps.googleusercontent.com
+    #   project_id: quickstart-1552681727597
+    #   auth_uri: https://accounts.google.com/o/oauth2/auth
+    #   token_uri: https://oauth2.googleapis.com/token
+    #   auth_provider_x509_cert_url: https://www.googleapis.com/oauth2/v1/certs
+    #   client_secret: Qib_WG8B0b5qMtyUHDEGoXPS
+    #   redirect_uris:
+    #     - urn:ietf:wg:oauth:2.0:oob
+    #     - http://localhost
+
+resources:
+  Resources:
+    # Cognito - User pool
+    CognitoUserPool:
+      Type: AWS::Cognito::UserPool
+      Properties:
+        UserPoolName: cognito_sls_backend_user_pool
+    # Cognito - Client
+    CognitoUserPoolClient:
+      Type: AWS::Cognito::UserPoolClient
+      Properties:
+        ClientName: cognito_sls_backend_client
+        UserPoolId:
+          Ref: CognitoUserPool
+        ExplicitAuthFlows:
+        - ADMIN_NO_SRP_AUTH

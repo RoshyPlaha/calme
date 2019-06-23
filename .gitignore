@@ -1,6 +1,6 @@
 website/node_modules
 website/static/node_modules
 website/.DS_Store
-backend/node_modules
+backend/googleauth_lambda/node_modules
 backend/.serverless/calme-backend.zip
-backend/package-lock.json
+backend/googleauth_lambda/package-lock.json
