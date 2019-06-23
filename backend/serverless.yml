@@ -13,6 +13,9 @@
 
 service: calme-backend # NOTE: update this with your service name
 
+plugins:
+  - serverless-offline
+  
 provider:
   name: aws
   runtime: nodejs10.x

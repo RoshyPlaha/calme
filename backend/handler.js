@@ -4,22 +4,20 @@ const google = require('./googleindex')
 
 const hello = async (event, context, callback) => {
 
-  const response = {
-    statusCode: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*'
-    },
-    body: JSON.stringify({
-      message: 'Go Serverless v1.0! Your function executed successfully and is authenticated!',
-      input: event,
-    }),
+  let response = {
+      "statusCode": 200,
+      "headers": {
+        "Access-Control-Allow-Origin": "*"
+      },
+      "isBase64Encoded": false
   };
-  google.startit();
-  callback(null, response);
 
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
-};
+  const data = await google.alternateStartIt();
+  console.log('here is the data ' + data);
+  response.body = JSON.stringify(data);
+
+  callback(null, response);
+}
 
 module.exports = {
   hello

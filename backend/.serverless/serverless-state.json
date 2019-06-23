@@ -119,7 +119,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/calme-backend/dev/1560800775794-2019-06-17T19:46:15.794Z/calme-backend.zip"
+                "S3Key": "serverless/calme-backend/dev/1561289328724-2019-06-23T11:28:48.724Z/calme-backend.zip"
               },
               "FunctionName": "calme-backend-dev-hello_sls",
               "Handler": "handler.hello",
@@ -138,14 +138,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "HelloUnderscoreslsLambdaVersionVbaVruOEp7UEHb9aGdd9dtILGLMa7LC6WbbTv749FI": {
+          "HelloUnderscoreslsLambdaVersionlJRBggUQe16JYcmQPokiK4Q0sWnPxEY8xR5xeJIjSM": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "HelloUnderscoreslsLambdaFunction"
               },
-              "CodeSha256": "ue5C6R5YU6sxAJ/qOjybTMn3zj2wyQKhosOK/nIhTqE="
+              "CodeSha256": "4FM+mmpRc1z8cssXgYcdM1ml03WVuFl143Qbi3DCsBs="
             }
           },
           "ApiGatewayRestApi": {
@@ -283,7 +283,7 @@
               ]
             }
           },
-          "ApiGatewayDeployment1560800769568": {
+          "ApiGatewayDeployment1561289309062": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -361,7 +361,7 @@
           "HelloUnderscoreslsLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "HelloUnderscoreslsLambdaVersionVbaVruOEp7UEHb9aGdd9dtILGLMa7LC6WbbTv749FI"
+              "Ref": "HelloUnderscoreslsLambdaVersionlJRBggUQe16JYcmQPokiK4Q0sWnPxEY8xR5xeJIjSM"
             }
           },
           "ServiceEndpoint": {
@@ -418,6 +418,9 @@
       },
       "vpc": {}
     },
+    "plugins": [
+      "serverless-offline"
+    ],
     "pluginsData": {},
     "functions": {
       "hello_sls": {
@@ -492,7 +495,7 @@
     "artifact": "/Users/roshy/Documents/projects/site/calme/backend/.serverless/calme-backend.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/calme-backend/dev/1560800775794-2019-06-17T19:46:15.794Z",
+    "artifactDirectoryName": "serverless/calme-backend/dev/1561289328724-2019-06-23T11:28:48.724Z",
     "artifact": "calme-backend.zip"
   }
 }
